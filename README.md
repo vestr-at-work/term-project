@@ -27,7 +27,7 @@ Library 'random' should be part of the standard Python installation, for more in
 
 Inputs:
 
-User has to put the input images in the 'inputs' folder. (They don't need to be grayscale. If they have colour, they will be automaticaly converted to grayscale.)
+User has to put the input images in the 'files/inputs' folder. (They don't need to be grayscale. If they have colour, they will be automaticaly converted to grayscale.)
 
 All major file formats are supported. More info here: https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
 
@@ -45,7 +45,7 @@ After that, user will be shown the following algorithms and asked to choose one 
 6. Error diffusion dithering - Floyd-Steinberg
 7. Error diffusion dithering - Sierra-lite
 
-If all done correctly (after a moment - the time depends on the algorithm chosen), user will be shown the dithered image and it will be saved in the 'outputs' folder as well. 
+If all done correctly (after a moment - the time depends on the algorithm chosen), user will be shown the dithered image and it will be saved in the 'files/outputs' folder as well. 
 
 
 
