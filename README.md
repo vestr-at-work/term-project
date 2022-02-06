@@ -1,5 +1,6 @@
 # Term project
-Implementing different types of dithering algorithms for grayscale images.
+Implementing different types of dithering algorithms for grayscale images. 
+Dithering on wiki: https://en.wikipedia.org/wiki/Dither#Digital_photography_and_image_processing
 
 (Black and white) Dithering in esence converts grayscale images to only black and white with various levels of fidelity according to the algorithm used.
 
@@ -33,7 +34,7 @@ Program run:
 
 After running the program, user will be asked to enter the name of the image (even with suffix!) desired to be dithered.
 
-After that user will be shown the following algorithms and asked to choose one by entering the number of the chosen one.
+After that, user will be shown the following algorithms and asked to choose one by entering the number of the chosen one.
 
 1. Threshold dithering
 2. Random dithering
