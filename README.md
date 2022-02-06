@@ -20,9 +20,9 @@ User manual:
 
 User needs to have installed the 'Pillow' library and 'random' library for the program to work.
 
-For help on the instalation of 'Pillow' click here: https://pillow.readthedocs.io/en/stable/installation.html
+For help on the installation of 'Pillow' click here: https://pillow.readthedocs.io/en/stable/installation.html
 
-Library 'random' should be part of the standard Python instalation, for more info look here: https://docs.python.org/3/library/random.html
+Library 'random' should be part of the standard Python installation, for more info look here: https://docs.python.org/3/library/random.html
 
 
 Inputs:
