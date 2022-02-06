@@ -193,12 +193,13 @@ try:
         input_error = True      
     
     if input_error is not True:
-        img_gray.save("files/outputs/output.png")       #saving the image
+        file = file.split(".")
+        img_gray.save(f"files/outputs/dithered_{file[0]}.png")       #saving the image
         img_gray.show()     #showing the final image to the user
 
     img_gray.close()
 
 except:
-    print("wrong file name entered")
+    print("\nwrong file name entered")
 
 #--------------------------end of the main program-----------------------------
