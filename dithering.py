@@ -10,6 +10,9 @@ from PIL import Image     #image handeling
 import random as rn     #generation of pseudo-random values 
 
 
+#-----------------------start of the functions-------------------------------
+
+
 def threshold(img): 
     #loading pixels of the image and size
     pixelMap = img.load()
@@ -140,6 +143,9 @@ def error_dif(img, mod=1):
     print("..done")
 
 
+#----------------------------end of the functions----------------------------------
+
+
 #--------------------------start of the main program-------------------------------
 
 print("program for image dithering.\n")
@@ -148,7 +154,7 @@ file = input("enter the file name (with suffix): ")
 file = file.strip()     #striping the input of unwanted leading and trailing space characters 
 
 try:
-    img = Image.open(f"files/{file}")
+    img = Image.open(f"files/inputs/{file}")
     img_gray = img.convert('L')     #converting the input image to grayscale
     img.close()
 
@@ -194,3 +200,5 @@ try:
 
 except:
     print("wrong file name entered")
+
+#--------------------------end of the main program-----------------------------
