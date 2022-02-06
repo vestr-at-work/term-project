@@ -1,5 +1,5 @@
 # Term project
-Implementing different types of dithering algorithms for grayscale images
+Implementing different types of dithering algorithms for grayscale images.
 
 (Black and white) Dithering in esence converts grayscale images to only black and white with various levels of fidelity according to the algorithm used.
 
