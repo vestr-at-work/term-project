@@ -1,8 +1,9 @@
 # Term project
 Implementing different types of dithering algorithms for grayscale images. 
-Dithering on wiki: https://en.wikipedia.org/wiki/Dither#Digital_photography_and_image_processing
 
 (Black and white) Dithering in esence converts grayscale images to only black and white with various levels of fidelity according to the algorithm used.
+
+Dithering on wiki: https://en.wikipedia.org/wiki/Dither#Digital_photography_and_image_processing
 
 In this project these algorithms are implemented:
 
