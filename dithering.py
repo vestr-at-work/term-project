@@ -1,17 +1,14 @@
 from PIL import Image
 import random as rn
 
-img1 = Image.open("files/input.jpg")
-img2 = img1.convert('L')
 
-
-
-def threshold(img):
+def threshold(img): 
     pixelMap = img.load()
     width, height = img.size[0], img.size[1]
+    print("\ngetting ready for threshold dithering...")
 
-    for i in range(width):
-        for j in range(height):
+    for j in range(height):
+        for i in range(width):
             value = int(pixelMap[i, j])
             if value > 127:
                 pixelMap[i, j] = 255
@@ -25,9 +22,10 @@ def threshold(img):
 def random(img):
     pixelMap = img.load()
     width, height = img.size[0], img.size[1]
+    print("\ngetting ready for random dithering...")
 
-    for i in range(width):
-        for j in range(height):
+    for j in range(height):
+        for i in range(width):
             value = int(pixelMap[i, j])
             if value > rn.randint(0,255):
                 pixelMap[i, j] = 255
@@ -41,13 +39,13 @@ def random(img):
 def clustered_dot(img, mod=1):
     if mod == 1:
         dither_arr = Image.open("files/dither_arrays/8x8_vert.png")
-        print("getting ready for clustered dot dithering (vertical/horizontal matrix)")
+        print("\ngetting ready for clustered dot dithering (vertical/horizontal matrix)...")
     if mod == 2:
         dither_arr = Image.open("files/dither_arrays/8x8_45deg.png")
-        print("getting ready for clustered dot dithering (45 degree matrix)")
+        print("\ngetting ready for clustered dot dithering (diagonal matrix)...")
     if mod == 3:
         dither_arr = Image.open("files/dither_arrays/4x4_bayer.png")
-        print("getting ready for clustered dot dithering (bayer matrix)")
+        print("\ngetting ready for clustered dot dithering (bayer matrix)...")
 
     dither_arr = dither_arr.convert('L')
     arr_pixelMap = dither_arr.load()
@@ -56,8 +54,8 @@ def clustered_dot(img, mod=1):
     pixelMap = img.load()
     width, height = img.size[0], img.size[1]
 
-    for i in range(width):
-        for j in range(height):
+    for j in range(height):
+        for i in range(width):
             value = int(pixelMap[i, j]) + int(arr_pixelMap[i%dith_arr_size, j%dith_arr_size])
             if value > 255:
                 pixelMap[i, j] = 255
@@ -69,17 +67,12 @@ def clustered_dot(img, mod=1):
     
     
 
-
-
-
 def error_dif(img, mod=1):
-    print("getting ready for error diffusion dithering")
     pixelMap = img.load()
     width, height = img.size[0], img.size[1]
-    print(width, height)
 
     if mod==1:
-        print("getting ready for floyd-steinberg error diffusion dithering")
+        print("\ngetting ready for floyd-steinberg error diffusion dithering...")
         for j in range(height): 
             for i in range(width):
                 value = pixelMap[i, j]
@@ -100,7 +93,7 @@ def error_dif(img, mod=1):
                     pixelMap[i+1, j+1] += int((1/16)*dif)
     
     if mod==2:
-        print("getting ready for sierra-lite error diffusion dithering")
+        print("\ngetting ready for sierra-lite error diffusion dithering...")
         for j in range(height):
             for i in range(width):    
                 value = pixelMap[i, j]
@@ -121,14 +114,57 @@ def error_dif(img, mod=1):
     print("..done")
 
 
+#--------------------------start of the main program-------------------------------
 
-error_dif(img2, 2)
-#clustered_dot(img2, 3)
-#threshold(img2)
+print("program for image dithering.\n")
 
+file = input("enter the file name (with suffix): ")
+file = file.strip()     #striping the input of unwanted leading and trailing space characters 
 
-img2.save("files/output13.png")
-img2.show()
+try:
+    img = Image.open(f"files/{file}")
+    img_gray = img.convert('L')     #converting the input image to grayscale
+    img.close()
 
-img1.close()
-img2.close()
+    print("\nwhat type of dithering do you want?\n")
+
+    print("1. threshold dithering")
+    print("2. random dithering")
+    print("3. cluster dot dithering - 8x8px vertical/horizontal matrix")
+    print("4. cluster dot dithering - 8x8px diagonal matrix")
+    print("5. cluster dot dithering - 4x4px bayer matrix")
+    print("6. error diffusion dithering - floyd-steinberg")
+    print("7. error diffusion dithering - sierra-lite")
+
+    dith_type = input("\nenter the number: ")
+    input_error = False     #setting default value for input error handling to False
+
+    dith_type = dith_type.strip()
+    dith_type = dith_type.strip(".")
+
+    if dith_type == '1':
+        threshold(img_gray)
+    elif dith_type == '2':
+        random(img_gray)
+    elif dith_type == '3':
+        clustered_dot(img_gray, 1)
+    elif dith_type == '4':
+        clustered_dot(img_gray, 2)
+    elif dith_type == '5':
+        clustered_dot(img_gray, 3)
+    elif dith_type == '6':
+        error_dif(img_gray, 1)
+    elif dith_type == '7':
+        error_dif(img_gray, 2)
+    else:       #if wrong value has been entered
+        print("\nwrong input")
+        input_error = True      
+    
+    if input_error is not True:
+        img_gray.save("files/output.png")
+        img_gray.show()     #showing the final image to the user
+
+    img_gray.close()
+
+except:
+    print("wrong file name entered")
